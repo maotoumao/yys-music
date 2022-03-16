@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./index.module.css";
 
-import bg from "@/resources/bg.gif?url";
 import initGame from "./game/initGame";
 import useLoadingProgress from "./usingLoadingProgress";
 
@@ -22,7 +21,7 @@ export default function Index() {
       ) : (
         <div className={styles.wrapper}>
           <img
-            src={bg}
+            src={'bg.gif'}
             className={
               window.innerHeight > window.innerWidth ? styles.bg_or : styles.bg
             }

@@ -1,26 +1,22 @@
 import event from "@/common/event";
 import { LOAD_EVENT, resource, ResourceBase, RESOURCE_TYPE } from "@eva/eva.js";
 import { GameEvents } from "@/common/constants";
-import bg from "@/resources/bg.gif?url";
-import ying from '@/resources/樱.png?url';
 import config from "@/common/config";
 
 /** 获取音符资源 */
 async function getNoteResources(name: string): Promise<ResourceBase[]> {
   const urls = [];
   for (let i = 0; i < 21; ++i) {
-    urls.push(`../../resources/${name}_${i + 1}.mp3?url`);
+    urls.push(`${name}_${i + 1}.mp3`);
   }
-  const realUrls = await Promise.all(
-    urls.map((url) => import(/* @vite-ignore */ url))
-  );
-  return realUrls.map((url, index) => ({
+
+  return urls.map((url, index) => ({
     name: `${name}_${index + 1}`,
     type: RESOURCE_TYPE.AUDIO,
     src: {
       audio: {
         type: "audio",
-        url: url.default,
+        url,
       },
     },
     preload: true,
@@ -43,7 +39,7 @@ export default async function loadResources() {
         src: {
           image: {
             type: "gif",
-            url: bg,
+            url: 'bg.gif',
           },
         },
         preload: true,
@@ -55,7 +51,7 @@ export default async function loadResources() {
         src: {
           image: {
             type: "png",
-            url: ying,
+            url: '樱.png',
           },
         },
         preload: true,
